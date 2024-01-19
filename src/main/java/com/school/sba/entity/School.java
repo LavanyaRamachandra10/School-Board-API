@@ -1,53 +1,45 @@
 package com.school.sba.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class School {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int SchoolId;
-	private String SchoolName;
-	private long SchoolContact;
-	private String SchoolLocation;
-	private String SchoolEmail;
-	public int getSchoolId() {
-		return SchoolId;
-	}
-	public void setSchoolId(int schoolId) {
-		SchoolId = schoolId;
-	}
-	public String getSchoolName() {
-		return SchoolName;
-	}
-	public void setSchoolName(String schoolName) {
-		SchoolName = schoolName;
-	}
-	public long getSchoolContact() {
-		return SchoolContact;
-	}
-	public void setSchoolContact(long schoolContact) {
-		SchoolContact = schoolContact;
-	}
-	public String getSchoolLocation() {
-		return SchoolLocation;
-	}
-	public void setSchoolLocation(String schoolLocation) {
-		SchoolLocation = schoolLocation;
-	}
-	public String getSchoolEmail() {
-		return SchoolEmail;
-	}
-	public void setSchoolEmail(String schoolEmail) {
-		SchoolEmail = schoolEmail;
-	}
+	private int schoolId;
+	private String schoolName;
+	private long schoolContact;
+	private String schoolLocation;
+	private String schoolEmail;
+	
 	
 	@OneToOne
 	private Schedule schedule;
+	
+	@OneToMany(mappedBy="school")
+	private List<AcademicProgram> academicprogramlist;
+	
+	
+	@OneToMany(mappedBy = "school")
+	private List<User> userlist=new ArrayList<User>();
 	
 	
 	
